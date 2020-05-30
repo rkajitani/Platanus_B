@@ -1,0 +1,3 @@
+# Synopsis
+combinatorial_gap_close.pl -b base.fa -c complement.fa
+remove_redundant_seq.pl [OPTION] seq1.fa
