@@ -123,7 +123,7 @@ platanus_b iterate [OPTIONS] 2>log
    Uncompressed and compressed (gzip or bzip2) files are accepted for -c, -ip, -IP, -op, -OP, -p, -x and -X option.
 
 ### Outputs:
-    PREFIX_iterativeAssembbly.fa (including sequences below)
+    PREFIX_iterativeAssembly.fa (including sequences below)
 
 PREFIX is specified by -o
 
