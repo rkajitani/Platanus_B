@@ -62,7 +62,7 @@ platanus_b iterate -c out_contig.fa -IP1 PE_1.fq PE_2.fq -ont ONT.fq 2>iterate.l
 ## Contig assembly usage
 ### Command
 ```sh
-platanus_allee assemble [OPTIONS] 2>log
+platanus_b assemble [OPTIONS] 2>log
 ```
 ### Options
     -o STR               : prefix of output files (default out, length <= 200)
