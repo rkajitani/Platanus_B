@@ -236,10 +236,11 @@ void GapClose::exec(void)
             libraryMT[i][j].mappedFP = NULL;
         }
         const long librarySD = libraryMT[i][0].getSDInsSize();
-        libraryMT[i].clear();
 
         totalReadLength += libraryMT[i][0].getTotalLength();
         totalNumRead += 2 * libraryMT[i][0].getNumPair();
+
+        libraryMT[i].clear();
 
         closer.loadLocalReads(gapSeqFP);
         fclose(gapSeqFP);
@@ -416,7 +417,7 @@ void GapClose::Closer::makeGapTable(void)
         j = 0;
         while (j < scaffold[i].length) {
             if (scaffold[i].base[j] == 4) {
-                while (scaffold[i].base[j] == 4 && j < scaffold[i].length) {
+                while (j < scaffold[i].length && scaffold[i].base[j] == 4) {
                     ++totalGapLength;
                     ++j;
                 }
@@ -449,7 +450,7 @@ void GapClose::Closer::makeGapTable(void)
 
                 gap[numGap].headSeq.resize(length - cutLength);
 
-                while (scaffold[i].base[j] == 4 && j < scaffold[i].length) {
+                while (j < scaffold[i].length && scaffold[i].base[j] == 4) {
                     this->insertGap(gap[numGap].scaffoldID, j, numGap);
                     ++j;
                 }
@@ -583,8 +584,8 @@ void GapClose::Closer::judgePairReadMappedNearGap(platanus::Position &mappedPosi
                     fwrite(&(pairSeq.length), sizeof(long), 1, tmpFP);
                     fwrite(pairSeq.base.c_str(), sizeof(char), pairSeq.length, tmpFP);
                 }
-                while (scaffold[mappedPosition.id - 1].base[start] == 4 && start < end)
-                ++start;
+                while (start < end && scaffold[mappedPosition.id - 1].base[start] == 4)
+					++start;
             }
             ++start;
         }

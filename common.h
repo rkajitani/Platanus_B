@@ -426,7 +426,8 @@ namespace platanus
         inline void writeTemporaryFile(FILE *seqFile) const
         {
             fwrite(&numUnknown, sizeof(int), 1, seqFile);
-            fwrite(&positionUnknown[0], sizeof(int), numUnknown, seqFile);
+			if (numUnknown > 0)
+				fwrite(&positionUnknown[0], sizeof(int), numUnknown, seqFile);
             fwrite(&length, sizeof(int), 1, seqFile);
             fwrite(&base[0], sizeof(char), length, seqFile);
         }
@@ -437,7 +438,8 @@ namespace platanus
             if (fread(&numUnknown, sizeof(int), 1, seqFile) != 1)
                 return 0;
             positionUnknown.resize(numUnknown);
-            fread(&positionUnknown[0], sizeof(int), numUnknown, seqFile);
+			if (numUnknown > 0)
+				fread(&positionUnknown[0], sizeof(int), numUnknown, seqFile);
 
             fread(&length, sizeof(int), 1, seqFile);
             base.resize(length);

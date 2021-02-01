@@ -4,7 +4,8 @@ UNAME := $(shell uname)
 ifeq ($(UNAME), Linux)
 	CXXFLAGS = -std=c++0x -O3 -funroll-loops -Wall -Wno-sign-compare -fopenmp -finline-limit-50000 -lm -Dnullptr=0 -DSUB_BIN_PATH_DEFINED=\"$(PWD)/sub_bin\"
 else
-	CXXFLAGS = -std=c++0x -O3 -funroll-loops -Wno-sign-compare -Xpreprocessor -fopenmp -lomp -lm -Dnullptr=0 -static-libstdc++ -mmacosx-version-min=10.9 -DSUB_BIN_PATH_DEFINED=\"$(PWD)/sub_bin\"
+	CXXFLAGS = -std=c++0x -O3 -funroll-loops -Wno-sign-compare -Xpreprocessor -fopenmp -DSUB_BIN_PATH_DEFINED=\"$(PWD)/sub_bin\"
+	LDFLAGS = -lomp
 endif
 
 PRG = platanus_b
@@ -26,7 +27,7 @@ $(SUBBIN):
 	cp scripts/*.pl scripts/*.pm  sub_bin
 
 $(PRG): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^
 .cpp.o:
 	$(CXX) -o $@ -c $< $(CXXFLAGS)
 

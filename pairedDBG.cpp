@@ -7127,7 +7127,7 @@ bool PairedDBG::detectContigBoundaryBreakpoints(const long edgeLength, const Gra
 		long checkStart = std::max(targetNode.contig[i-1].end - std::min(edgeLength, (targetNode.contig[i-1].end - targetNode.contig[i-1].start) / 2), 0L);
 		long checkEnd = std::min(targetNode.contig[i].start + std::min(edgeLength, (targetNode.contig[i].end - targetNode.contig[i].start) / 2), static_cast<long>(baseBreakpoint.size()));
 
-		if (std::find(baseBreakpoint.begin() + checkStart, baseBreakpoint.begin() + checkEnd, 1) != baseBreakpoint.begin() + checkEnd) {
+		if (checkStart < checkEnd && std::find(baseBreakpoint.begin() + checkStart, baseBreakpoint.begin() + checkEnd, 1) != baseBreakpoint.begin() + checkEnd) {
 			contigBreakpoint[i] = 1;
 			isBroken = true;
 		}
