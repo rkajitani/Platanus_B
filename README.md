@@ -123,75 +123,7 @@ platanus_b iterate [OPTIONS] 2>log
    Uncompressed and compressed (gzip or bzip2) files are accepted for -c, -ip, -IP, -op, -OP, -p, -x and -X option.
 
 ### Outputs:
-    PREFIX_allPhasedScaffold.fa (including sequences below)
-    PREFIX_primaryBubble.fa
-    PREFIX_secondaryBubble.fa
-    PREFIX_nonBubbleHetero.fa
-    PREFIX_nonBubbleOther.fa
-    PREFIX_consensusInput.fa (for "consensus" command (-c))
-
-
-PREFIX is specified by -o
-  
-  
-## Consensus scaffold construction usage
-### Command
-```sh
-platanus_allee consensus [OPTIONS] 2>log
-```
-
-### Options
-    -o STR                             : prefix of output file (default out, length <= 200)
-    -c FILE1 [FILE2 ...]               : input_scaffolds (fasta format)
-    -ip{INT} PAIR1 [PAIR2 ...]         : lib_id inward_pair_file (interleaved file, fasta or fastq)
-    -IP{INT} FWD1 REV1 [FWD2 REV2 ...] : lib_id inward_pair_files (separate forward and reverse files, fasta or fastq)
-    -op{INT} PAIR1 [PAIR2 ...]         : lib_id outward_pair_file (interleaved, fasta or fastq)
-    -OP{INT} FWD1 REV1 [FWD2 REV2 ...] : lib_id outward_pair_files (separate forward and reverse files, fasta or fastq)
-    -p PAIR1 [PAIR2 ...]               : long-read file (PacBio, Nanopore) (fasta or fastq)
-    -x PAIR1 [PAIR2 ...]               : linked-reads files (paired-ends, 10x Genomics) (interleaved, fasta or fastq)
-    -X FWD1 REV1 [FWD2 REV2 ...]       : linked-reads files (paired-ends, 10x Genomics) (separate forward and reverse files, fasta or fastq)
-    -t INT                             : number of threads (default 1)
-    -tmp DIR                           : directory for temporary files (default .)
-    -e FLOAT                           : coverage depth of homozygous region (default auto)
-    -L INT                             : maximum fragment length of tag (10x Genomics) (default 200000)
-    -s INT1 [INT2 ...]                 : mapping seed length for short reads (default 32 64 96)
-    -l INT                             : minimum number of links to scaffold (default 3)
-    -mapper FILE                       : path of mapper executable file (default, minimap, only effective with -p option)
-    -minimap2_sensitive                : sensitive mode for minimap2 (default, off; only effective with -p option)
-    -no_partial                        : not close gaps partially, i.e. only close ones completely (default, off)
-
-### Input format:
-    Uncompressed and compressed (gzip or bzip2) files are accepted for -c, -ip, -IP, -op, -OP, -ont, -p and -gc options.
-
-### Outputs
-    PREFIX_iterativeAssembly.fa (final)
-
-PREFIX is specified by -o
-  
-  
-## Dividing erroneous sequences usage
-### Command
-```sh
-platanus_allee divide [OPTIONS] 2>log
-```
-
-### Options
-    -o STR                             : prefix of output file and directory (do not use "/", default out, length <= 200)
-    -c FILE1 [FILE2 ...]               : contig (or scaffold) file (fasta format)
-    -gc FILE1 [FILE2 ...]              : Guiding contig file; i.e. other assemblies, synthetic long-reads or corrected reads (fasta or fastq)
-    -p FILE1 [FILE2 ...]               : PacBio long-read file (fasta or fastq)
-    -ont FILE1 [FILE2 ...]             : Oxford Nanopore long-read file (fasta or fastq)
-    -t INT                             : number of threads (default 1)
-    -tmp DIR                           : directory for temporary files (default .)
-    -sub_bin DIR                       : directory for binary files which platanus_b use internally (e.g. minimap2) (default compilation-dir/sub_bin)
-    -no_gap_close                      : not close gaps by guiding contigs (default, false)
-    -keep_file                         : keep intermediate files (default, off)
-
-### Input format:
-    Uncompressed and compressed (gzip or bzip2) files are accepted for -c, -gc, -ont and -p options.
-
-### Outputs
-    PREFIX_combined.fa (final)
+    PREFIX_iterativeAssembbly.fa (including sequences below)
 
 PREFIX is specified by -o
 
