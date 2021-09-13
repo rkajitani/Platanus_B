@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+use FindBin;
+use lib "$FindBin::Bin";
 use my_bio;
 
 (@ARGV != 2) and die "usage: $0 seq.fa around_length\n";
