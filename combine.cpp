@@ -36,6 +36,13 @@ Combine::Combine()
     optionSingleArgs["-tmp"] = ".";
     optionBool["-no_gap_close"] = false;
     optionBool["-keep_file"] = false;
+
+	optionSingleArgs["-combine_l"] = "10000";
+	optionSingleArgs["-combine_L"] = "100000";
+	optionSingleArgs["-combine_t"] = "10000";
+	optionSingleArgs["-combine_s"] = "10";
+	optionSingleArgs["-combine_g"] = "100000";
+	optionSingleArgs["-combine_i"] = "0.9";
 }
 
 
@@ -59,6 +66,12 @@ void Combine::usage(void) const
               << "    -sub_bin DIR                       : directory for binary files which platanus_b use internally (e.g. minimap2) (default " <<  optionSingleArgs.at("-sub_bin") << ")\n"
               << "    -no_gap_close                      : not close gaps by guiding contigs (default, false)\n"
               << "    -keep_file                         : keep intermediate files (default, off)\n"
+              << "    -combine_g INT                     : maximug gap-size in scaffolding (default " << optionSingleArgs.at("-combine_g") << ")\n"
+              << "    -combine_i INT                     : minimum identity in scaffolding (0-1, default " << optionSingleArgs.at("-combine_i") << ")\n"
+              << "    -combine_l INT                     : minimum length-cutoff in scaffolding (default " << optionSingleArgs.at("-combine_l") << ")\n"
+              << "    -combine_L INT                     : maximum length-cutoff in scaffolding (default " << optionSingleArgs.at("-combine_L") << ")\n"
+              << "    -combine_t INT                     : length tolerance to detect conflicts (default " << optionSingleArgs.at("-combine_t") << ")\n"
+              << "    -combine_s INT                     : number of steps in scaffolding (default " << optionSingleArgs.at("-combine_s") << ")\n"
               << "\n"
 
               << "Input format:\n"
@@ -175,6 +188,12 @@ void Combine::execCombineMode(void)
 
 	oss << " -t " << optionSingleArgs["-t"]
 		<< " -tmp " << optionSingleArgs["-tmp"]
+		<< " -combine_l " << optionSingleArgs["-combine_l"]
+		<< " -combine_L " << optionSingleArgs["-combine_L"]
+		<< " -combine_t " << optionSingleArgs["-combine_t"]
+		<< " -combine_s " << optionSingleArgs["-combine_s"]
+		<< " -combine_g " << optionSingleArgs["-combine_g"]
+		<< " -combine_i " << optionSingleArgs["-combine_i"]
 		<< " -o " << intermediateDirectoryName << "/" << optionSingleArgs["-o"]
 		<< " > "  << intermediateDirectoryName << "/" << optionSingleArgs["-o"] << ".scafLog 2>&1"
 	;
