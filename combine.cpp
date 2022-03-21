@@ -212,6 +212,8 @@ void Combine::execCombinatorialGapClosePerl(void)
 	std::ostringstream oss;
 	oss << this->subBinPath  << "/combinatorial_gap_close.pl"
 		<< " -t " << optionSingleArgs["-t"]
+		<< " -d " <<  optionSingleArgs["-combine_g"]
+		<< " -i " <<  optionSingleArgs["-combine_i"]
 		<< " -b " << intermediateDirectoryName << "/" << optionSingleArgs["-o"] << "_combined.fa"
 		<< " -c "
 	;
