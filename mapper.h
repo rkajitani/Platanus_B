@@ -163,7 +163,7 @@ public:
     void gatherPairReadMappedSameContig(std::vector<SeqLib> &library, const long numThread);
 	void mapPairToCalculateCoverage(std::vector<SeqLib> &library, const long numThread);
 	void mapLongReadAndSaveReadLink(std::vector<SeqLib> &library, const long minContigLength, const long numThread);
-	void readLongReadPAFfileAndSaveLink(const std::string PAFFilename, std::vector<SeqLib> &library, const long minAlignmentLength, const double minCoverage, const double minIdentity, const long tolerenceLength, const long numThread);
+	void readLongReadPAFfileAndSaveLink(const std::string PAFFilename, std::vector<SeqLib> &library, const long minAlignmentLength, const double minCoverage, const double minIdentity, const long tolerenceLength, const long maxOverhang, const long numThread);
 };
 
 

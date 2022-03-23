@@ -1852,7 +1852,7 @@ void Mapper::reduceAlignmentsGreedy(vector<LongReadAlignment> &alignments, const
 	alignments.resize(numRetained);
 }
 
-void Mapper::readLongReadPAFfileAndSaveLink(const std::string PAFFilename, vector<SeqLib> &library, const long minAlignmentLength, const double minCoverage, const double minIdentity, const long tolerenceLength, const long numThread)
+void Mapper::readLongReadPAFfileAndSaveLink(const std::string PAFFilename, vector<SeqLib> &library, const long minAlignmentLength, const double minCoverage, const double minIdentity, const long tolerenceLength, const long maxOverhang, const long numThread)
 {
     cerr << "reading result of aligner ..." << endl;
 
@@ -1921,7 +1921,23 @@ void Mapper::readLongReadPAFfileAndSaveLink(const std::string PAFFilename, vecto
 
 		int alignmentLength = std::max(qEnd - qStart, tEnd - tStart);
 
-		if ((double)match / alignmentLength >= minIdentity && (alignmentLength >= minAlignmentLength || (double)alignmentLength / std::min(qLength, tLength) >= minCoverage)) {
+		long leftOverhang = maxOverhang;
+		long rightOverhang = maxOverhang;
+		if (maxOverhang >= 0) {
+			if (strand == "+") {
+				leftOverhang = std::min(qStart, tStart);
+				rightOverhang = std::min(qLength - qEnd, tLength - tEnd);
+			}
+			else {
+				leftOverhang = std::min(qLength - qEnd, tStart);
+				rightOverhang = std::min(qStart, tLength - tEnd);
+			}
+		}
+
+		if (std::max(leftOverhang, rightOverhang) <= maxOverhang &&
+			(double)match / alignmentLength >= minIdentity && 
+			(alignmentLength >= minAlignmentLength || (double)alignmentLength / std::min(qLength, tLength) >= minCoverage)) {
+
 			unsigned contigIndex = this->nameIndex[tName];
 			alignmentBuffer.resize(alignmentBuffer.size() + 1);
 

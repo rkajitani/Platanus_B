@@ -81,6 +81,7 @@ SolveDBG::SolveDBG()
 	optionSingleArgs["-combine_l"] = "10000";
 	optionSingleArgs["-combine_L"] = "100000";
 	optionSingleArgs["-combine_t"] = "10000";
+	optionSingleArgs["-combine_h"] = "10000";
 	optionSingleArgs["-combine_s"] = "10";
 	optionSingleArgs["-combine_g"] = "100000";
 	optionSingleArgs["-combine_i"] = "0.9";
@@ -702,9 +703,9 @@ void SolveDBG::mapLibraryAndInitGraph(const int numThread)
 		longReadLibraryMT[0].setAverageLength((long)((double)(longReadLibraryMT[0].getTotalLength()) / (2 * longReadLibraryMT[0].getNumPair()) + 0.5));
 
 		if (!optionBool["-combine"])
-			mapper->contigMap.readLongReadPAFfileAndSaveLink(alignerOutFilename, longReadLibraryMT, LONG_READ_MIN_ALIGNMENT_LENGTH, LONG_READ_MIN_ALIGNMENT_COVERAGE, LONG_READ_MIN_ALIGNMENT_IDENTITY, contigMaxK, numThread);
+			mapper->contigMap.readLongReadPAFfileAndSaveLink(alignerOutFilename, longReadLibraryMT, LONG_READ_MIN_ALIGNMENT_LENGTH, LONG_READ_MIN_ALIGNMENT_COVERAGE, LONG_READ_MIN_ALIGNMENT_IDENTITY, contigMaxK, -1, numThread);
 		else
-			mapper->contigMap.readLongReadPAFfileAndSaveLink(alignerOutFilename, longReadLibraryMT, atol(optionSingleArgs["-combine_l"].c_str()), LONG_READ_MIN_ALIGNMENT_COVERAGE, atof(optionSingleArgs["-combine_i"].c_str()), atol(optionSingleArgs["-combine_t"].c_str()), numThread);
+			mapper->contigMap.readLongReadPAFfileAndSaveLink(alignerOutFilename, longReadLibraryMT, atol(optionSingleArgs["-combine_l"].c_str()), LONG_READ_MIN_ALIGNMENT_COVERAGE, atof(optionSingleArgs["-combine_i"].c_str()), atol(optionSingleArgs["-combine_t"].c_str()), atol(optionSingleArgs["-combine_h"].c_str()), numThread);
 
 //		std::ostringstream cmdSS;
 //		cmdSS << "rm " << alignerOutFilename;

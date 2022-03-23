@@ -40,6 +40,7 @@ Combine::Combine()
 	optionSingleArgs["-combine_l"] = "10000";
 	optionSingleArgs["-combine_L"] = "100000";
 	optionSingleArgs["-combine_t"] = "10000";
+	optionSingleArgs["-combine_h"] = "10000";
 	optionSingleArgs["-combine_s"] = "10";
 	optionSingleArgs["-combine_g"] = "100000";
 	optionSingleArgs["-combine_i"] = "0.9";
@@ -71,6 +72,7 @@ void Combine::usage(void) const
               << "    -combine_l INT                     : minimum length-cutoff in scaffolding (default " << optionSingleArgs.at("-combine_l") << ")\n"
               << "    -combine_L INT                     : maximum length-cutoff in scaffolding (default " << optionSingleArgs.at("-combine_L") << ")\n"
               << "    -combine_t INT                     : length tolerance to detect conflicts (default " << optionSingleArgs.at("-combine_t") << ")\n"
+              << "    -combine_h INT                     : max overhang length of alignment (-1 means no limit, default " << optionSingleArgs.at("-combine_h") << ")\n"
               << "    -combine_s INT                     : number of steps in scaffolding (default " << optionSingleArgs.at("-combine_s") << ")\n"
               << "\n"
 
@@ -191,6 +193,7 @@ void Combine::execCombineMode(void)
 		<< " -combine_l " << optionSingleArgs["-combine_l"]
 		<< " -combine_L " << optionSingleArgs["-combine_L"]
 		<< " -combine_t " << optionSingleArgs["-combine_t"]
+		<< " -combine_h " << optionSingleArgs["-combine_h"]
 		<< " -combine_s " << optionSingleArgs["-combine_s"]
 		<< " -combine_g " << optionSingleArgs["-combine_g"]
 		<< " -combine_i " << optionSingleArgs["-combine_i"]
