@@ -33,6 +33,14 @@ Address for this tool: <platanus@bio.titech.ac.jp>
    
    
 ## Installation
+### Using Docker
+```sh
+docker pull rkajitani/platanus_b
+docker run -it --rm -v $(pwd):/work -w /work rkajitani/platanus_b
+```
+Options of `docker run` can be modified according to users' environments and purposes (e.g., --rm and -v).
+
+### From source
 ```sh
 make
 cp platanus_b <installation_path>
